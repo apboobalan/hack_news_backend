@@ -16,7 +16,7 @@ defmodule HackNewsBackendWeb.Router do
   scope "/", HackNewsBackendWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", ChallengeController, :index
   end
 
   # Other scopes may use custom stacks.

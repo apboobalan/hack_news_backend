@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :hack_news_backend, HackNewsBackend.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "postgrex",
+  password: "",
   database: "hack_news_backend_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
