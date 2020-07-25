@@ -16,6 +16,7 @@ defmodule HackNewsBackendWeb.Router do
   scope "/", HackNewsBackendWeb do
     pipe_through :browser
 
+    resources "/challenge", ChallengeController, only: [:create]
     get "/", ChallengeController, :index
   end
 

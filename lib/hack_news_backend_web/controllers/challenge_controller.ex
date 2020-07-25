@@ -9,4 +9,9 @@ defmodule HackNewsBackendWeb.ChallengeController do
 
     conn |> json(challenges)
   end
+
+  def create(conn, params) do
+    %Challenge{} |> Challenge.changeset(params) |> Repo.insert
+    conn |> json(%{status: :ok})
+  end
 end
