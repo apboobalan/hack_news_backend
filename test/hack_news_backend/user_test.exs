@@ -55,10 +55,18 @@ defmodule HackNewsBackend.UserTest do
 
       User.create_user(user_params)
 
-      user = User.find_and_validate_password(user_params["email"], user_params["password"])
+      {:ok, user} = User.find_and_validate_password(user_params["email"], user_params["password"])
 
       assert user.name == user_params["name"]
       assert user.email == user_params["email"]
+    end
+
+    test "return error when the user is not found or password is not valid" do
+      user_params = %{"name" => "Booda", "email" => "booda@booda.com", "password" => "aaa"}
+
+      User.create_user(user_params)
+
+      {:error, :invalid} = User.find_and_validate_password("some other mail", user_params["password"])
     end
   end
 end
