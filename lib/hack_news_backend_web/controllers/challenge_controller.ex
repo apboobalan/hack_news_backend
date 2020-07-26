@@ -5,8 +5,7 @@ defmodule HackNewsBackendWeb.ChallengeController do
   alias HackNewsBackend.Repo
 
   def index(conn, _params) do
-    challenges = Challenge |> Repo.all()
-
+    challenges = Challenge.all()
     conn |> render("challenges.json", challenges: challenges)
   end
 

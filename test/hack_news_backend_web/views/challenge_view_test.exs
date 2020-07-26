@@ -5,11 +5,11 @@ defmodule HackNewsBackendWeb.ChallengeViewTest do
   import Phoenix.View
 
   test "renders challenge.json" do
-    assert %{title: "challenge 1", description: "challenge 1 description."} = render(HackNewsBackendWeb.ChallengeView, "challenge.json", challenge: %{title: "challenge 1", description: "challenge 1 description."})
+    assert %{title: "challenge 1", description: "challenge 1 description."} = render(HackNewsBackendWeb.ChallengeView, "challenge.json", challenge: %{title: "challenge 1", description: "challenge 1 description.", tags: []})
   end
 
 test "renders challenges.json" do
-  [challenge1, challenge2] = [%{title: "challenge 1", description: "challenge 1 description"}, %{title: "challenge 1", description: "challenge 1 description"}]
+  [challenge1, challenge2] = [%{title: "challenge 1", description: "challenge 1 description", tags: []}, %{title: "challenge 1", description: "challenge 1 description", tags: []}]
   assert challenge1 in render(HackNewsBackendWeb.ChallengeView, "challenges.json", challenges: [challenge1, challenge2])
 end
 end
