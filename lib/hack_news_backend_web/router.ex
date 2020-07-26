@@ -9,6 +9,9 @@ defmodule HackNewsBackendWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :authenticated do
+    plug HackNewsBackend.Auth.AuthPipeline
+  end
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -22,6 +25,8 @@ defmodule HackNewsBackendWeb.Router do
 
     post "/user/sign_up", RegistrationController, :sign_up
     post "/user/sign_in", SessionController, :sign_in
+
+    pipe_through :authenticated
     resources "/challenge", ChallengeController, only: [:create]
     get "/", ChallengeController, :index
   end

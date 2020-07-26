@@ -4,9 +4,9 @@ defmodule HackNewsBackendWeb.SessionViewTest do
   import Phoenix.View
 
   test "renders user.json" do
-    assert %{name: "Booda", email: "booda@booda.com"} =
-             render(HackNewsBackendWeb.SessionView, "user.json",
-               user: %{name: "Booda", email: "booda@booda.com"}
+    assert %{name: "Booda", email: "booda@booda.com", jwt: "it'sajwt"} =
+             render(HackNewsBackendWeb.SessionView, "user_with_jwt.json",
+               %{user: %{name: "Booda", email: "booda@booda.com"}, jwt: "it'sajwt"}
              )
   end
 

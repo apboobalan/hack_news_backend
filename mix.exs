@@ -47,7 +47,9 @@ defmodule HackNewsBackend.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:ex_machina, "~> 2.4", only: :test},
-      {:bcrypt_elixir, "~> 2.2"}
+      {:bcrypt_elixir, "~> 2.2"},
+      {:guardian, "~> 2.1"},
+      {:comeonin, "~> 5.3"}
     ]
   end
 

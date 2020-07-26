@@ -14,7 +14,9 @@ defmodule HackNewsBackendWeb.RegistrationControllerTest do
 
       user = User |> Repo.get_by!(name: user_params["name"])
 
-      assert %{"status" => "ok"} = response
+      assert response["email"]
+      assert response["name"]
+      assert response["jwt"]
       assert user.name == user_params["name"]
       assert user.email == user_params["email"]
     end

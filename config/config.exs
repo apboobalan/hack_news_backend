@@ -26,6 +26,10 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :hack_news_backend, HackNewsBackend.Auth.Authenticaton,
+  issuer: "hack_news_backend",
+  secret_key: "mt2XuuZtlPWr6QrIzMx8n0yGOOhxYvbkytIfxWNx/vNMdgjx06PTZRrALnVfjsC5"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

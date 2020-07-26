@@ -1,10 +1,11 @@
 defmodule HackNewsBackendWeb.SessionView do
   use HackNewsBackendWeb, :view
 
-  def render("user.json", %{user: user}) do
+  def render("user_with_jwt.json", %{user: user, jwt: jwt}) do
     %{
       name: user.name,
-      email: user.email
+      email: user.email,
+      jwt: jwt
     }
   end
 
