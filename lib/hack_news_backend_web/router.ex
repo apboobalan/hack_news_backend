@@ -20,6 +20,7 @@ defmodule HackNewsBackendWeb.Router do
   scope "/api", HackNewsBackendWeb, as: :api do
     pipe_through :api
 
+    post "/user", RegistrationController, :sign_up
     resources "/challenge", ChallengeController, only: [:create]
     get "/", ChallengeController, :index
   end
