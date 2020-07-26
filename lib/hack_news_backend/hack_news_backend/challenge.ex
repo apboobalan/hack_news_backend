@@ -8,6 +8,7 @@ defmodule HackNewsBackend.HackNewsBackend.Challenge do
     field :description, :string
     field :title, :string
     many_to_many :tags, Tag, join_through: "challenges_tags"
+    belongs_to :user, HackNewsBackend.User
 
     timestamps()
   end
@@ -15,8 +16,8 @@ defmodule HackNewsBackend.HackNewsBackend.Challenge do
   @doc false
   def changeset(challenge, attrs) do
     challenge
-    |> cast(attrs, [:title, :description])
-    |> validate_required([:title, :description])
+    |> cast(attrs, [:title, :description, :user_id])
+    |> validate_required([:title, :description, :user_id])
     |> put_assoc(:tags, parse_tags(attrs))
   end
 
@@ -27,7 +28,7 @@ defmodule HackNewsBackend.HackNewsBackend.Challenge do
   end
 
   def all() do
-    __MODULE__ |> Repo.all() |> Repo.preload(:tags)
+    __MODULE__ |> Repo.all() |> Repo.preload([:tags, :user])
   end
 
   defp get_or_insert_tag(name) do

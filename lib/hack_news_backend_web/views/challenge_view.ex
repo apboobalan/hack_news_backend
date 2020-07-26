@@ -9,7 +9,8 @@ defmodule HackNewsBackendWeb.ChallengeView do
     %{
       title: challenge.title,
       description: challenge.description,
-      tags: render_many(challenge.tags, HackNewsBackendWeb.TagView, "tag.json")
+      tags: render_many(challenge.tags, HackNewsBackendWeb.TagView, "tag.json"),
+      user: render_one(challenge.user, HackNewsBackendWeb.UserView, "user.json")
     }
   end
 end
