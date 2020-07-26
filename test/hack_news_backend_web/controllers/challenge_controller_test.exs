@@ -8,7 +8,7 @@ defmodule HackNewsBackendWeb.ChallengeControllerTest do
 
       response =
         conn
-        |> get(Routes.challenge_path(conn, :index))
+        |> get(Routes.api_challenge_path(conn, :index))
         |> json_response(200)
 
       assert %{"title" => challenge1.title, "description" => challenge1.description} in response
@@ -21,12 +21,12 @@ defmodule HackNewsBackendWeb.ChallengeControllerTest do
       params = string_params_for(:challenge)
 
       conn
-      |> post(Routes.challenge_path(conn, :create), params)
+      |> post(Routes.api_challenge_path(conn, :create), params)
       |> json_response(200)
 
       response =
         conn
-        |> get(Routes.challenge_path(conn, :index))
+        |> get(Routes.api_challenge_path(conn, :index))
         |> json_response(200)
 
       assert params in response

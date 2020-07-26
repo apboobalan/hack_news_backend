@@ -15,15 +15,14 @@ defmodule HackNewsBackendWeb.Router do
 
   scope "/", HackNewsBackendWeb do
     pipe_through :browser
+  end
+
+  scope "/api", HackNewsBackendWeb, as: :api do
+    pipe_through :api
 
     resources "/challenge", ChallengeController, only: [:create]
     get "/", ChallengeController, :index
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", HackNewsBackendWeb do
-  #   pipe_through :api
-  # end
 
   # Enables LiveDashboard only for development
   #
