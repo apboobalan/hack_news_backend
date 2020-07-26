@@ -11,7 +11,8 @@ defmodule HackNewsBackendWeb.ChallengeView do
       title: challenge.title,
       description: challenge.description,
       tags: render_many(challenge.tags, HackNewsBackendWeb.TagView, "tag.json"),
-      user: render_one(challenge.user, HackNewsBackendWeb.UserView, "user.json")
+      created: render_one(challenge.created, HackNewsBackendWeb.UserView, "created.json"),
+      voted: render_many(challenge.users, HackNewsBackendWeb.UserView, "user.json")
     }
   end
 
@@ -21,8 +22,9 @@ defmodule HackNewsBackendWeb.ChallengeView do
       title: challenge_detail.title,
       description: challenge_detail.description,
       tags: render_many(challenge_detail.tags, HackNewsBackendWeb.TagView, "tag.json"),
-      user: render_one(challenge_detail.user, HackNewsBackendWeb.UserView, "user.json"),
-      teams: render_many(challenge_detail.teams, HackNewsBackendWeb.TeamView, "team.json")
+      created: render_one(challenge_detail.created, HackNewsBackendWeb.UserView, "created.json"),
+      teams: render_many(challenge_detail.teams, HackNewsBackendWeb.TeamView, "team.json"),
+      voted: render_many(challenge_detail.users, HackNewsBackendWeb.UserView, "user.json")
     }
   end
 end

@@ -11,7 +11,7 @@ defmodule HackNewsBackendWeb.ChallengeController do
 
   def create(conn, params) do
     user = Guardian.Plug.current_resource(conn)
-    %Challenge{} |> Challenge.changeset(params |> Map.put("user_id", user.id)) |> Repo.insert
+    %Challenge{} |> Challenge.changeset(params |> Map.put("created_id", user.id)) |> Repo.insert
     conn |> json(%{status: :ok})
   end
 

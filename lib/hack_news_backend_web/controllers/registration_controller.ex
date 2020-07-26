@@ -4,8 +4,13 @@ defmodule HackNewsBackendWeb.RegistrationController do
   alias HackNewsBackend.{User, Auth}
 
   def sign_up(conn, %{"user" => user}) do
-    user = User.create_user(user)
-    {:ok, jwt, _full_claims} = Auth.Authenticaton.encode_and_sign(user)
-    conn |> render("user_with_jwt.json", %{user: user, jwt: jwt})
+    case User.create_user(user) do
+      {:error, _changeset} ->
+        conn |> json(%{status: :ok, message: :already_taken})
+
+      {:ok, user} ->
+        {:ok, jwt, _full_claims} = Auth.Authenticaton.encode_and_sign(user)
+        conn |> render("user_with_jwt.json", %{user: user, jwt: jwt})
+    end
   end
 end

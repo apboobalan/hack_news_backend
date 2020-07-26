@@ -16,11 +16,12 @@ defmodule HackNewsBackend.HackNewsBackend.TeamsUsers do
     team
     |> cast(attrs, [:team_id, :user_id])
     |> validate_required([:team_id, :user_id])
+    |> unique_constraint([:team_id, :user_id])
   end
 
   def add_user_to_team(user, team) do
     %__MODULE__{}
     |> changeset(%{"user_id" => user.id, "team_id" => team.id})
-    |> Repo.insert!()
+    |> Repo.insert()
   end
 end

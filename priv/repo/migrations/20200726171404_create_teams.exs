@@ -8,5 +8,7 @@ defmodule HackNewsBackend.Repo.Migrations.CreateTeams do
 
       timestamps()
     end
+
+    create unique_index(:teams, [:name, :challenge_id])
   end
 end

@@ -17,10 +17,11 @@ defmodule HackNewsBackend.HackNewsBackend.Team do
     challenge
     |> cast(attrs, [:name, :challenge_id])
     |> validate_required([:name, :challenge_id])
+    |> unique_constraint([:name, :challenge_id])
   end
 
   def add_team(params) do
-    %__MODULE__{} |> changeset(params) |> Repo.insert!()
+    %__MODULE__{} |> changeset(params) |> Repo.insert()
   end
 
   def get_team(params) do

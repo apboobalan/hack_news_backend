@@ -8,8 +8,9 @@ defmodule HackNewsBackend.User do
     field :name, :string
     field :password, :string, virtual: true
     field :password_hash, :string
-    has_many :challenges, HackNewsBackend.HackNewsBackend.Challenge
+    has_many :challenges_created, HackNewsBackend.HackNewsBackend.Challenge, foreign_key: :created_id
     many_to_many :teams, HackNewsBackend.HackNewsBackend.Team, join_through: "teams_users"
+    many_to_many :challenges, HackNewsBackend.HackNewsBackend.Challenge, join_through: "users_challenges_votings"
 
     timestamps()
   end
@@ -27,6 +28,7 @@ defmodule HackNewsBackend.User do
     |> validate_required([:name, :email, :password])
     |> validate_length(:email, min: 5, max: 255)
     |> validate_format(:email, ~r/@/)
+    |> unique_constraint(:email)
   end
 
   def generate_password_hash(%{valid?: true, changes: %{password: password}} = changeset) do
@@ -36,7 +38,7 @@ defmodule HackNewsBackend.User do
   def generate_password_hash(changeset), do: changeset
 
   def create_user(params) do
-    %__MODULE__{} |> changeset(params) |> Repo.insert!()
+    %__MODULE__{} |> changeset(params) |> Repo.insert()
   end
 
   def find_and_validate_password(email, password) do
