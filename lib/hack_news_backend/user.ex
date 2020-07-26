@@ -9,6 +9,7 @@ defmodule HackNewsBackend.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     has_many :challenges, HackNewsBackend.HackNewsBackend.Challenge
+    many_to_many :teams, HackNewsBackend.HackNewsBackend.Team, join_through: "teams_users"
 
     timestamps()
   end

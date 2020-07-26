@@ -14,4 +14,9 @@ defmodule HackNewsBackendWeb.ChallengeController do
     %Challenge{} |> Challenge.changeset(params |> Map.put("user_id", user.id)) |> Repo.insert
     conn |> json(%{status: :ok})
   end
+
+  def show(conn, %{"id" => id}) do
+    challenge_detail = Challenge.get_detail(id)
+    conn |> render("challenge_detail.json", challenge_detail: challenge_detail)
+  end
 end

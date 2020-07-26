@@ -9,6 +9,7 @@ defmodule HackNewsBackend.HackNewsBackend.Challenge do
     field :title, :string
     many_to_many :tags, Tag, join_through: "challenges_tags"
     belongs_to :user, HackNewsBackend.User
+    has_many :teams, HackNewsBackend.HackNewsBackend.Team
 
     timestamps()
   end
@@ -29,6 +30,10 @@ defmodule HackNewsBackend.HackNewsBackend.Challenge do
 
   def all() do
     __MODULE__ |> Repo.all() |> Repo.preload([:tags, :user])
+  end
+
+  def get_detail(id) do
+    __MODULE__ |> Repo.get!(id) |> Repo.preload([:tags, :user, {:teams, :users}])
   end
 
   defp get_or_insert_tag(name) do

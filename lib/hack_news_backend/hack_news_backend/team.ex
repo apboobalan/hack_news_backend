@@ -7,6 +7,7 @@ defmodule HackNewsBackend.HackNewsBackend.Team do
   schema "teams" do
     field :name, :string
     belongs_to :challenge, HackNewsBackend.HackNewsBackend.Challenge
+    many_to_many :users, HackNewsBackend.User, join_through: "teams_users"
 
     timestamps()
   end
@@ -24,7 +25,8 @@ defmodule HackNewsBackend.HackNewsBackend.Team do
 
   def get_team(params) do
     %{"name" => name, "challenge_id" => challenge_id} = params
+
     from(t in __MODULE__, where: t.name == ^name and t.challenge_id == ^challenge_id)
-    |> Repo.one
+    |> Repo.one()
   end
 end
