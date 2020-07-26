@@ -7,6 +7,7 @@ defmodule HackNewsBackendWeb.ChallengeView do
 
   def render("challenge.json", %{challenge: challenge}) do
     %{
+      id: challenge.id,
       title: challenge.title,
       description: challenge.description,
       tags: render_many(challenge.tags, HackNewsBackendWeb.TagView, "tag.json"),

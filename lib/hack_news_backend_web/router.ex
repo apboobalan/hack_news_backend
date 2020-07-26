@@ -27,6 +27,7 @@ defmodule HackNewsBackendWeb.Router do
     post "/user/sign_in", SessionController, :sign_in
 
     pipe_through :authenticated
+    post "/challenge/team", TeamController, :create
     resources "/challenge", ChallengeController, only: [:create]
     get "/", ChallengeController, :index
   end
