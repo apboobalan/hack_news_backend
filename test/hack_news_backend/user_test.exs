@@ -48,4 +48,17 @@ defmodule HackNewsBackend.UserTest do
       assert "has invalid format" in errors_on(changeset).email
     end
   end
+
+  describe "find_and_validate_password/2" do
+    test "return user after validation" do
+      user_params = %{"name" => "Booda", "email" => "booda@booda.com", "password" => "aaa"}
+
+      User.create_user(user_params)
+
+      user = User.find_and_validate_password(user_params["email"], user_params["password"])
+
+      assert user.name == user_params["name"]
+      assert user.email == user_params["email"]
+    end
+  end
 end
