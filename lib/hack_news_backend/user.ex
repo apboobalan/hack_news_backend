@@ -36,4 +36,14 @@ defmodule HackNewsBackend.User do
   def create_user(params) do
     %__MODULE__{} |> changeset(params) |> Repo.insert!()
   end
+
+
+  def find_and_validate_password(email, password) do
+    user = __MODULE__ |> Repo.get_by!(email: email)
+    if Bcrypt.verify_pass(password, user.password_hash) do
+      user
+    else
+      nil
+    end
+  end
 end
