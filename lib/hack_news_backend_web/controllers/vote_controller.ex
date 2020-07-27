@@ -9,7 +9,7 @@ defmodule HackNewsBackendWeb.VoteController do
       UsersChallengesVotings.vote_challenge(params |> Map.put("user_id", user.id))
       conn |> json(%{status: :ok})
     rescue
-      _ -> conn |> json(%{status: :error, messaage: :already_voted})
+      _ -> conn |> put_status(400) |> json(%{status: :error, messaage: :already_voted})
     end
   end
 end

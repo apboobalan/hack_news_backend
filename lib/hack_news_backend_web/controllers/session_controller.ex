@@ -9,7 +9,7 @@ defmodule HackNewsBackendWeb.SessionController do
         conn |> render("user_with_jwt.json", user: user, jwt: jwt)
 
       {:error, :invalid} ->
-        conn |> render("session_error.json", message: "Either name or password is incorrect.")
+        conn |> put_status(400) |> json(%{status: :error})
     end
   end
 end

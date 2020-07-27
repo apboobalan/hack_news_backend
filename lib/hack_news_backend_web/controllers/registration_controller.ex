@@ -6,7 +6,7 @@ defmodule HackNewsBackendWeb.RegistrationController do
   def sign_up(conn, %{"user" => user}) do
     case User.create_user(user) do
       {:error, _changeset} ->
-        conn |> json(%{status: :ok, message: :already_taken})
+        conn |> put_status(400) |> json(%{status: :error})
 
       {:ok, user} ->
         {:ok, jwt, _full_claims} = Auth.Authenticaton.encode_and_sign(user)

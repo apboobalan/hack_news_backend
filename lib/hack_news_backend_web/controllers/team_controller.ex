@@ -9,7 +9,7 @@ defmodule HackNewsBackendWeb.TeamController do
         conn |> json(%{status: :ok})
 
       {:error, _changeset} ->
-        conn |> json(%{status: :error, message: "already_taken"})
+        conn |> put_status(400) |> json(%{status: :error, message: "already_taken"})
     end
   end
 
@@ -18,7 +18,7 @@ defmodule HackNewsBackendWeb.TeamController do
     team = Team.get_team(params)
 
     case TeamsUsers.add_user_to_team(user, team) do
-      {:error, _} -> conn |> json(%{status: :error, message: :already_added})
+      {:error, _} -> conn |> put_status(400) |>json(%{status: :error, message: :already_added})
       {:ok, _} -> conn |> json(%{status: :ok})
     end
   end
