@@ -49,7 +49,8 @@ defmodule HackNewsBackend.MixProject do
       {:ex_machina, "~> 2.4", only: :test},
       {:bcrypt_elixir, "~> 2.2"},
       {:guardian, "~> 2.1"},
-      {:comeonin, "~> 5.3"}
+      {:comeonin, "~> 5.3"},
+      {:cors_plug, "~> 2.0"}
     ]
   end
 

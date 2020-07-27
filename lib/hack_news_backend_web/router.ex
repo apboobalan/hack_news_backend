@@ -13,6 +13,7 @@ defmodule HackNewsBackendWeb.Router do
     plug HackNewsBackend.Auth.AuthPipeline
   end
   pipeline :api do
+    plug CORSPlug, origin: "http://localhost:3000"
     plug :accepts, ["json"]
   end
 
