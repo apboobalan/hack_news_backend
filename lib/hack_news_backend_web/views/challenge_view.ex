@@ -32,7 +32,7 @@ defmodule HackNewsBackendWeb.ChallengeView do
     }
   end
 
-  defp enable_upvote?(challenge, user) do
+  def enable_upvote?(challenge, user) do
     already_voted_users = challenge.users |> Enum.map(& &1.email)
     created_by_user = challenge.created.email
     non_eligible_voters = [created_by_user | already_voted_users] |> Enum.uniq()

@@ -4,9 +4,20 @@ defmodule HackNewsBackendWeb.ChallengeControllerTest do
 
   alias HackNewsBackend.{User, Repo}
 
+  defp insert_challenge_api(conn) do
+    params = string_params_for(:challenge)
+
+    conn
+    |> get_authenticated_session()
+    |> post(Routes.api_challenge_path(conn, :create), params)
+    |> json_response(200)
+    params
+  end
+
   describe "index/2" do
     test "returns list of challenges", %{conn: conn} do
-      [challenge1, challenge2] = insert_pair(:challenge)
+      challenge1 = insert_challenge_api(conn)
+      challenge2 = insert_challenge_api(conn)
 
       response =
         conn
@@ -15,10 +26,10 @@ defmodule HackNewsBackendWeb.ChallengeControllerTest do
         |> json_response(200)
         titles = response |> Enum.map(& &1["title"])
         descriptions = response |> Enum.map(& &1["description"])
-      assert challenge1.title in titles
-      assert challenge2.title in titles
-      assert challenge1.description in descriptions
-      assert challenge2.description in descriptions
+      assert challenge1["title"] in titles
+      assert challenge2["title"] in titles
+      assert challenge1["description"] in descriptions
+      assert challenge2["description"] in descriptions
     end
   end
 
@@ -37,7 +48,11 @@ defmodule HackNewsBackendWeb.ChallengeControllerTest do
         |> get(Routes.api_challenge_path(conn, :index))
         |> json_response(200)
 
-      assert params in response
+        titles = response |> Enum.map(& &1["title"])
+        descriptions = response |> Enum.map(& &1["description"])
+
+        assert params["title"] in titles
+        assert params["description"] in descriptions
     end
 
     test "store challenge with tags", %{conn: conn} do
@@ -53,8 +68,13 @@ defmodule HackNewsBackendWeb.ChallengeControllerTest do
         |> get_authenticated_session()
         |> get(Routes.api_challenge_path(conn, :index))
         |> json_response(200)
-
-      assert params in response
+        titles = response |> Enum.map(& &1["title"])
+        descriptions = response |> Enum.map(& &1["description"])
+        tags = response |> Enum.flat_map(& &1["tags"]) |> Enum.map(& &1["name"])
+        assert params["title"] in titles
+        assert params["description"] in descriptions
+        assert (params["tags"] |> List.first |> Map.get("name")) in tags
+        assert (params["tags"] |> Enum.at(1) |> Map.get("name")) in tags
     end
   end
 

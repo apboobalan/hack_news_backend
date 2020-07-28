@@ -25,9 +25,9 @@ defmodule HackNewsBackendWeb.SessionControllerTest do
       response =
         conn
         |> post(Routes.api_session_path(conn, :sign_in), %{"user" => invalid_user_params})
-        |> json_response(200)
+        |> json_response(400)
 
-      assert %{ "message" => "Either name or password is incorrect."} == response
+      assert %{ "status" => "error"} == response
     end
   end
 end
