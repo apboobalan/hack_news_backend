@@ -12,16 +12,18 @@ RUN mix local.rebar --force
 
 # RUN mix clean
 
-RUN mix deps.get
+# RUN mix deps.get
 
 # RUN mix deps.compile
 
-RUN npm install --prefix=assets
+# RUN npm install --prefix=assets
 
 # RUN mix ecto.create
 
 # RUN mix ecto.migrate
 
 # CMD ["mix", "phx.server"]
+
 # CMD ["./migrate_and_run.sh"]
-CMD ["/bin/ash"]
+
+# CMD ["/bin/ash"]

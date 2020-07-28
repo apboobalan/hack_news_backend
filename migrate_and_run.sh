@@ -1,6 +1,9 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ash
 
-cd /app
+mix deps.get
+
 mix ecto.create
+
 mix ecto.migrate
+
 mix phx.server
