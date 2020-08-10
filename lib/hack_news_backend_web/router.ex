@@ -28,12 +28,13 @@ defmodule HackNewsBackendWeb.Router do
     post "/user/sign_in", SessionController, :sign_in
 
     pipe_through :authenticated
+
+    post "/challenge", ChallengeController, :create
+    get "/challenges", ChallengeController, :index
+    get "/challenge/:id", ChallengeController, :show
     post "/challenge/team", TeamController, :create
     post "/challenge/team/user", TeamController, :add_user_to_team
-    post "/challenge", ChallengeController, :create
-    get "/challenge/:id", ChallengeController, :show
     post "/challenge/vote", VoteController, :vote
-    get "/challenges", ChallengeController, :index
   end
 
   # Enables LiveDashboard only for development

@@ -34,5 +34,5 @@ defmodule HackNewsBackendWeb.ChallengeController do
     challenges |> Enum.sort_by(created, :desc)
   end
 
-  defp sort(challenges, %{}), do: challenges
+  defp sort(challenges, %{}), do: challenges |> sort(%{"sort" => "created"})
 end
